@@ -20,6 +20,7 @@ compute_words  x = foldl (+) 0 [(length (words y))| y<-(lines x)]
 
 --Solution of Question 5
 compose_multiple:: [t -> t] -> t -> t
+compose_multiple [] a = a
 compose_multiple [x] a = (x a)
 compose_multiple (x:xs) a =  (x (compose_multiple xs a))
 
@@ -31,4 +32,4 @@ maptree :: (a->b) -> BinaryTree a ->BinaryTree b
 maptree f Nil = Nil
 maptree f (Node a l r) = Node (f a) (maptree f l) (maptree f r)
 
-
+	
