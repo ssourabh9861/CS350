@@ -15,13 +15,13 @@ condition (x,y) = (x>=0) && (x<10) && (y>=0) && (y<10)
 neighbors x y = quickSort (filter condition [(a+x, b+y)|(a,b)<-change_val])
 
 --Solution of Question 4
+compute_words:: String -> Int
+compute_words  x = foldl (+) 0 [(length (words y))| y<-(lines x)]
+
+--Solution of Question 5
 compose_multiple:: [t -> t] -> t -> t
 compose_multiple [x] a = (x a)
 compose_multiple (x:xs) a =  (x (compose_multiple xs a))
-
---Solution of Question 5
-compute_words:: String -> Int
-compute_words  x = foldl (+) 0 [(length (words y))| y<-(lines x)]
 
 --Solution of Question 6a
 data BinaryTree a = Nil | Node a (BinaryTree a) (BinaryTree a) deriving (Show, Read, Eq)  
