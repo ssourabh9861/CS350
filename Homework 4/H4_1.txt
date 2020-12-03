@@ -30,6 +30,6 @@ c . Associativity. m >>= f >>= g is equivalent to m >>= (\ x -> f x >>= g)
 		Nothing >>= (\ x -> f x >>= g) = Nothing     // Nothing on binding results Nothing
 
 		If m is (Just a)
-		(Just a) >>= (\ x -> f x >>= g)  = (f a) >>= g    // >>= would extract a from (Just a) and the function on a
+		(Just a) >>= (\ x -> f x >>= g)  = (f a) >>= g    // >>= would extract a from (Just a) and the apply the function on a
 		If (f a) is Nothing then  (f a) >>= g = Nothing
 		If (f a) = (Just y)  then (f a) >>= g = g y
