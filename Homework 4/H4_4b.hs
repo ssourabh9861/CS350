@@ -1,0 +1,1 @@
+main = getContents >>= print . sum . takeWhile (>= 0) . map read . lines

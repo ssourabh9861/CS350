@@ -35,4 +35,3 @@ maptree f (Node a l r) = Node (f a) (maptree f l) (maptree f r)
 foldTree :: (a -> b -> b -> b) -> b -> BinaryTree a -> b
 foldTree f t Nil = t
 foldTree f t (Node a t1 t2) = (f a) (foldTree f t t1) (foldTree f t t2)
-

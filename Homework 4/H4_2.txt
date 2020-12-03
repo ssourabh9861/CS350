@@ -1,0 +1,27 @@
+
+Proof for each Monadic law that List satisfies it:
+a . Left identity. return a >>= f is equivalent to f a:
+	
+	return a = [a]
+	[a]>>=f  = f a
+
+b . Right identity. m >>= return is equivalent to m:
+	m>>= f = [y|(x<-m), (y<-f x)]
+	Here f is return,
+	m>>=return  = [x|(x<-m)] = m as (return x = x)
+
+c . Associativity. m >>= f >>= g is equivalent to m >>= (\ x -> f x >>= g)
+	
+	LHS:
+	m>>=f  = [y|(x<-m), (y<-f x)]
+	m>>=f>>=g = [z| (x<-m), (y<- f x), (z<- g y)]
+
+	RHS:
+	m >>= (\ x -> f x >>= g) = [y | (x<-m), (y<- (\ x -> f x >>= g) x)]
+	                         = [y | (x<-m), (y<- (f x >>= g))]
+     where (f x >>= g) = [a| (z<- (f x)), (a<- g z)]
+
+    m >>= (\ x -> f x >>= g)  = [y | (x<-m), (y<- (f x >>= g))]
+                              = [y | (x<-m), (y<- [a| (z<- (f x)), (a<- g z)])]
+                              = [y | (x<-m), (z<- (f x)), (y<- g z)]
+                              = [z| (x<-m), (y<- f x), (z<- g y)]

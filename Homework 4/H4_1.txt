@@ -1,0 +1,35 @@
+
+In case of Maybe:
+a . Left identity. return a >>= f is equivalent to f a:
+ 
+	return a = Just a
+	return a >>= f  = (Just a)  >>= f
+					= f a
+
+b . Right identity. m >>= return is equivalent to m:
+
+	For m being Nothing
+	Nothing >>= return  = Nothing           // Nothing on binding results Nothing
+	(Just a) >>= return  = (return a) = Just a 
+
+c . Associativity. m >>= f >>= g is equivalent to m >>= (\ x -> f x >>= g)
+	
+	LHS:
+		If m is Nothing
+		Nothing >>= f >>= g = Nothing >>= g        // Nothing on binding results Nothing
+		                    = Nothing              // Nothing on binding results Nothing
+
+		If m is (Just a)
+
+		(Just a) >>= f >>= g = (f a) >>= g
+		If (f a) is Nothing then  (f a) >>= g = Nothing
+		If (f a) = (Just y)  then (f a) >>= g = g y
+
+	RHS:
+		If m is Nothing
+		Nothing >>= (\ x -> f x >>= g) = Nothing     // Nothing on binding results Nothing
+
+		If m is (Just a)
+		(Just a) >>= (\ x -> f x >>= g)  = (f a) >>= g    // >>= would extract a from (Just a) and the function on a
+		If (f a) is Nothing then  (f a) >>= g = Nothing
+		If (f a) = (Just y)  then (f a) >>= g = g y
